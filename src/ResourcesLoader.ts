@@ -1,0 +1,48 @@
+import * as PIXI from "pixi.js";
+// import * as WebFont from 'webfontloader';
+// import { PreloaderManager } from './utils/preloader/preloader-manager';
+// import { mainSlot } from 'index';
+/**
+ * Created by aniii526 on 1.09.2017.
+ */
+export class ResourcesLoader {
+    protected loader: PIXI.Loader;
+    protected fontFamilies: string[];
+    protected fontUrls: string[];
+    constructor() {
+        this.loader = new PIXI.Loader();
+    }
+    public init() {
+        return new Promise((resolve, reject) => {
+            const version = 4;
+
+            this.loader.add("bg", "./assets/back.png?" + version);
+            this.loader.add("tileset", "./assets/tileset.png?" + version);
+            this.loader.add("cat", "./assets/sprite-2-1.png?" + version);
+
+            this.loader.on("progress", (loader, res) => {
+                // (loader.progress);
+                // PreloaderManager.instance.setProgress(loader.progress > 90 ? 90 : loader.progress)
+            });
+
+            this.loader.once("complete", (loader, res) => {
+                // ('Нужно сделать загрузку шрифтов');
+                // WebFont.load({
+                //     custom: {
+                //         families: this.fontFamilies,
+                //         urls: this.fontUrls
+                //     },
+                //     active: () => {
+                //         resolve();
+                //     }
+                // });
+                resolve();
+            });
+            this.loader.on("error", () => {
+                reject("ПРОИЗОШЛА ОШИБКА ЗАГРУЗКИ");
+            });
+
+            this.loader.load();
+        });
+    }
+}
