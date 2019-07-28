@@ -14,11 +14,14 @@ export class ResourcesLoader {
     }
     public init() {
         return new Promise((resolve, reject) => {
-            const version = 4;
+            const version = 5;
 
             this.loader.add("bg", "./assets/back.png?" + version);
             this.loader.add("tileset", "./assets/tileset.png?" + version);
             this.loader.add("cat", "./assets/sprite-2-1.png?" + version);
+            this.loader.add("./assets/test.json?" + version);
+            this.loader.add("panel1", "./assets/panel1.png?" + version);
+            this.loader.add("panel3", "./assets/panel3.png?" + version);
 
             this.loader.on("progress", (loader, res) => {
                 // (loader.progress);
