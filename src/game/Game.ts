@@ -1,5 +1,7 @@
 import * as PIXI from "pixi.js";
 import { app } from "..";
+import { CrossyCatStateManager } from "./CrossyCatStateManager";
+import { CrossyCatStates } from "./CrossyCatStates";
 
 export class Game extends PIXI.Sprite {
     private bgs: PIXI.Sprite[];
@@ -7,9 +9,15 @@ export class Game extends PIXI.Sprite {
         super();
     }
     public init() {
-        this.createBg();
+        // this.createBg();
+        this.createStateManager();
     }
-    private createBg() {
+    public createStateManager() {
+        const crossyCatStateManager = new CrossyCatStateManager(this);
+        crossyCatStateManager.init();
+        crossyCatStateManager.setCurrentState(CrossyCatStates.MENU);
+    }
+    public createBg() {
         this.bgs = [];
         const bg1 = new PIXI.Sprite(app.getTexture("bg"));
         this.addChild(bg1);
@@ -62,7 +70,7 @@ export class Game extends PIXI.Sprite {
             //     bg1.position.x = 0;
             // }
             for (const iterator of this.bgs) {
-                iterator.position.x -= 1 * delta;
+                iterator.position.x -= 0.5 * delta;
             }
             for (const iterator of this.bgs) {
                 if (iterator.position.x < -320) {
