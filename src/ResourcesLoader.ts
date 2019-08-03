@@ -22,6 +22,7 @@ export class ResourcesLoader {
             this.loader.add("./assets/test.json?" + version);
             this.loader.add("panel1", "./assets/panel1.png?" + version);
             this.loader.add("panel3", "./assets/panel3.png?" + version);
+            this.loader.add("water", "./assets/sprite-6-0.png?" + version);
 
             this.loader.on("progress", (loader, res) => {
                 // (loader.progress);
