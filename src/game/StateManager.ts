@@ -13,8 +13,10 @@ export class StateManager {
     public init() {
         //
     }
-    public update(time: number) {
-        //
+    public update(delta: number) {
+        if (this.current) {
+            this.current.update(delta);
+        }
     }
     public generateDictionary(): void {
         throw new Error("Не заполнен словарь стейтов");

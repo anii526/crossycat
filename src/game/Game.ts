@@ -16,6 +16,10 @@ export class Game extends PIXI.Sprite {
         const crossyCatStateManager = new CrossyCatStateManager(this);
         crossyCatStateManager.init();
         crossyCatStateManager.setCurrentState(CrossyCatStates.MENU);
+
+        app.pixi.app.ticker.add(delta => {
+            crossyCatStateManager.update(delta);
+        });
     }
     public createBg() {
         this.bgs = [];

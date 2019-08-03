@@ -19,7 +19,7 @@ export class State extends PIXI.Sprite {
     public exitState(newState: State) {
         //
     }
-    public update(time: number) {
+    public update(delta: number) {
         //
     }
 }
