@@ -10,16 +10,12 @@ export class Game extends Scene {
     private waterAnimTime: number;
     private speedAnimTime: number;
     private hero: Hero;
+    private popupMenu: PIXI.Sprite;
+    private currentState: string;
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
         this.scrollerBG.init("bg");
         this.addChild(this.scrollerBG);
-
-        const title = new PIXI.Sprite(app.getTexture("title"));
-        title.anchor.set(0.5, 0.5);
-        title.position.x = 320 / 2;
-        title.position.y = 120;
-        this.addChild(title);
 
         const panelLeft3 = new PIXI.Sprite(app.getTexture("panel1"));
         panelLeft3.anchor.set(0, 1);
@@ -74,15 +70,26 @@ export class Game extends Scene {
         this.hero.position.y = 385;
         this.addChild(this.hero);
 
+        this.popupMenu = new PIXI.Sprite();
+        this.addChild(this.popupMenu);
+
+        const title = new PIXI.Sprite(app.getTexture("title"));
+        title.anchor.set(0.5, 0.5);
+        title.position.x = 320 / 2;
+        title.position.y = 120;
+        this.popupMenu.addChild(title);
+
         const playBtn = new PIXI.Sprite(app.getTexture("playBtn"));
         playBtn.position.x = 320 / 2;
         playBtn.position.y = 280;
         playBtn.anchor.set(0.5, 0.5);
         playBtn.interactive = true;
         playBtn.on("pointerdown", () => {
-            this.manager.setCurrentScene(CrossyCatScenes.MENU);
+            // this.manager.setCurrentScene(CrossyCatScenes.MENU);
+            this.closeMenu();
+            this.changeState("game");
         });
-        this.addChild(playBtn);
+        this.popupMenu.addChild(playBtn);
 
         const settingsBtn = new PIXI.Sprite(app.getTexture("settingsBtn"));
         settingsBtn.position.x = 320 / 2;
@@ -92,10 +99,12 @@ export class Game extends Scene {
         settingsBtn.on("pointerdown", () => {
             this.manager.setCurrentScene(CrossyCatScenes.MENU);
         });
-        this.addChild(settingsBtn);
+        this.popupMenu.addChild(settingsBtn);
 
         this.waterAnimTime = 0;
         this.speedAnimTime = 0.03;
+
+        this.changeState("menu");
     }
     public update(delta: number) {
         if (this.scrollerBG) {
@@ -109,5 +118,26 @@ export class Game extends Scene {
     }
     public runScene(oldScene: Scene) {
         console.log("Menu show");
+    }
+    public changeState(name: string) {
+        switch (name) {
+            case "menu":
+                this.showMenu();
+                break;
+            case "game":
+                this.showGame();
+                break;
+        }
+        this.currentState = name;
+    }
+    private showMenu() {
+        console.log("openMenu");
+    }
+    private closeMenu() {
+        console.log("closeMenu");
+        this.popupMenu.alpha = 0;
+    }
+    private showGame() {
+        console.log("showGame");
     }
 }
