@@ -54,7 +54,7 @@ export class Menu2 extends State {
         hatBtn.anchor.set(0.5, 0);
         hatBtn.interactive = true;
         hatBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU);
+            this.manager.setCurrentState(CrossyCatStates.HATS);
         });
         this.addChild(hatBtn);
 
@@ -64,7 +64,7 @@ export class Menu2 extends State {
         flaskBtn.anchor.set(0.5, 0);
         flaskBtn.interactive = true;
         flaskBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU);
+            this.manager.setCurrentState(CrossyCatStates.FLASK);
         });
         this.addChild(flaskBtn);
 
