@@ -50,6 +50,16 @@ export class Menu extends State {
         panelRight1.position.y = 381;
         this.addChild(panelRight1);
 
+        const tree = new PIXI.Sprite(app.getTexture("tree"));
+        tree.position.x = -31;
+        tree.position.y = 228;
+        this.addChild(tree);
+
+        const bushes = new PIXI.Sprite(app.getTexture("bushes"));
+        bushes.position.x = 289;
+        bushes.position.y = 355;
+        this.addChild(bushes);
+
         this.waterAnimTime = 0;
         this.speedAnimTime = 0.03;
 

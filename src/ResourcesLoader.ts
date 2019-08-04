@@ -23,6 +23,8 @@ export class ResourcesLoader {
             this.loader.add("panel1", "./assets/panel1.png?" + version);
             this.loader.add("panel3", "./assets/panel3.png?" + version);
             this.loader.add("water", "./assets/sprite-6-0.png?" + version);
+            this.loader.add("tree", "./assets/sprite-145-0.png?" + version);
+            this.loader.add("bushes", "./assets/sprite-147-0.png?" + version);
 
             this.loader.on("progress", (loader, res) => {
                 // (loader.progress);
