@@ -13,6 +13,12 @@ export class Menu extends State {
         this.scrollerBG.init();
         this.addChild(this.scrollerBG);
 
+        const title = new PIXI.Sprite(app.getTexture("title"));
+        title.anchor.set(0.5, 0.5);
+        title.position.x = 320 / 2;
+        title.position.y = 120;
+        this.addChild(title);
+
         const panelLeft3 = new PIXI.Sprite(app.getTexture("panel1"));
         panelLeft3.anchor.set(0, 1);
         panelLeft3.position.x = -13;
@@ -67,6 +73,24 @@ export class Menu extends State {
         this.on("pointerdown", () => {
             this.manager.setCurrentState(CrossyCatStates.MENU2);
         });
+
+        const playBtn = new PIXI.Sprite(app.getTexture("playBtn"));
+        playBtn.position.x = 320 / 2;
+        playBtn.position.y = 280;
+        playBtn.anchor.set(0.5, 0.5);
+        playBtn.on("pointerdown", () => {
+            this.manager.setCurrentState(CrossyCatStates.MENU2);
+        });
+        this.addChild(playBtn);
+
+        const settingsBtn = new PIXI.Sprite(app.getTexture("settingsBtn"));
+        settingsBtn.position.x = 320 / 2;
+        settingsBtn.position.y = 330;
+        settingsBtn.anchor.set(0.5, 0.5);
+        settingsBtn.on("pointerdown", () => {
+            this.manager.setCurrentState(CrossyCatStates.MENU2);
+        });
+        this.addChild(settingsBtn);
     }
     public update(delta: number) {
         if (this.scrollerBG) {

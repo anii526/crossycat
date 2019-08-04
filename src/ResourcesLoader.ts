@@ -25,6 +25,13 @@ export class ResourcesLoader {
             this.loader.add("water", "./assets/sprite-6-0.png?" + version);
             this.loader.add("tree", "./assets/sprite-145-0.png?" + version);
             this.loader.add("bushes", "./assets/sprite-147-0.png?" + version);
+            this.loader.add("title", "./assets/sprite-82-1.png?" + version);
+
+            this.loader.add("playBtn", "./assets/sprite-68-0.png?" + version);
+            this.loader.add(
+                "settingsBtn",
+                "./assets/sprite-111-0.png?" + version
+            );
 
             this.loader.on("progress", (loader, res) => {
                 // (loader.progress);
