@@ -34,6 +34,7 @@ export class ResourcesLoader {
 
             this.loader.add("hat1", "./assets/sprite-16-0.png?" + version);
             this.loader.add("test123", "./assets/test123.png?" + version);
+            this.loader.add("test234", "./assets/test234.png?" + version);
 
             this.loader.add("bg2", "./assets/background-32-0.png?" + version);
             this.loader.add("playBtn2", "./assets/sprite-68-1.png?" + version);
@@ -46,6 +47,25 @@ export class ResourcesLoader {
             this.loader.add(
                 "creditBtn",
                 "./assets/sprite-179-2.png?" + version
+            );
+
+            this.loader.add(
+                "bigRedBtn",
+                "./assets/sprite-216-1.png?" + version
+            );
+            this.loader.add(
+                "activeBigRedBtn",
+                "./assets/sprite-216-0.png?" + version
+            );
+            this.loader.add("tree2", "./assets/sprite-149-0.png?" + version);
+            this.loader.add("bushes2", "./assets/sprite-151-0.png?" + version);
+            this.loader.add(
+                "skinsMachine",
+                "./assets/sprite-100-1.png?" + version
+            );
+            this.loader.add(
+                "hatsMachine",
+                "./assets/sprite-100-0.png?" + version
             );
 
             this.loader.on("progress", (loader, res) => {
