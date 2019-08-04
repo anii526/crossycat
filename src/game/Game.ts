@@ -22,26 +22,6 @@ export class Game extends PIXI.Sprite {
         });
     }
     public createBg() {
-        this.bgs = [];
-        const bg1 = new PIXI.Sprite(app.getTexture("bg"));
-        this.addChild(bg1);
-        const bg2 = new PIXI.Sprite(app.getTexture("bg"));
-        bg2.position.x = 320;
-        this.addChild(bg2);
-        this.bgs.push(bg1);
-        this.bgs.push(bg2);
-
-        const panelLeft = new PIXI.Sprite(app.getTexture("panel3"));
-        panelLeft.anchor.set(0, 1);
-        panelLeft.position.y = 480;
-        this.addChild(panelLeft);
-
-        const paneRight = new PIXI.Sprite(app.getTexture("panel3"));
-        paneRight.anchor.set(1, 1);
-        paneRight.position.x = 320;
-        paneRight.position.y = 480;
-        this.addChild(paneRight);
-
         const cat = new PIXI.Sprite(app.getTexture("cat"));
         cat.anchor.set(0.5, 1);
         cat.position.x = 100;

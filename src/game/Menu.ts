@@ -1,6 +1,7 @@
 import { app } from "..";
 import { CrossyCatScrollerBackground } from "./CrossyCatScrollerBackground";
 import { CrossyCatStates } from "./CrossyCatStates";
+import { Hero } from "./Hero";
 import { State } from "./State";
 
 export class Menu extends State {
@@ -8,6 +9,7 @@ export class Menu extends State {
     private water: PIXI.Sprite;
     private waterAnimTime: number;
     private speedAnimTime: number;
+    private hero: Hero;
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
         this.scrollerBG.init();
@@ -66,18 +68,17 @@ export class Menu extends State {
         bushes.position.y = 355;
         this.addChild(bushes);
 
-        this.waterAnimTime = 0;
-        this.speedAnimTime = 0.03;
-
-        this.interactive = true;
-        this.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU2);
-        });
+        this.hero = new Hero();
+        this.hero.init();
+        this.hero.position.x = 45;
+        this.hero.position.y = 385;
+        this.addChild(this.hero);
 
         const playBtn = new PIXI.Sprite(app.getTexture("playBtn"));
         playBtn.position.x = 320 / 2;
         playBtn.position.y = 280;
         playBtn.anchor.set(0.5, 0.5);
+        playBtn.interactive = true;
         playBtn.on("pointerdown", () => {
             this.manager.setCurrentState(CrossyCatStates.MENU2);
         });
@@ -87,10 +88,14 @@ export class Menu extends State {
         settingsBtn.position.x = 320 / 2;
         settingsBtn.position.y = 330;
         settingsBtn.anchor.set(0.5, 0.5);
+        settingsBtn.interactive = true;
         settingsBtn.on("pointerdown", () => {
             this.manager.setCurrentState(CrossyCatStates.MENU2);
         });
         this.addChild(settingsBtn);
+
+        this.waterAnimTime = 0;
+        this.speedAnimTime = 0.03;
     }
     public update(delta: number) {
         if (this.scrollerBG) {
