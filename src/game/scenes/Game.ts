@@ -127,6 +127,9 @@ export class Game extends Scene {
             case "game":
                 this.showGame();
                 break;
+            case "lose":
+                this.showLose();
+                break;
         }
         this.currentState = name;
     }
@@ -139,5 +142,54 @@ export class Game extends Scene {
     }
     private showGame() {
         console.log("showGame");
+        setTimeout(() => {
+            this.changeState("lose");
+        }, 1000);
+    }
+    private showLose() {
+        console.log("showLose");
+        this.removeChild(this.hero);
+        // this.changeState("lose");
+        const playBtn = new PIXI.Sprite(app.getTexture("playBtn"));
+        playBtn.position.x = 320 / 2;
+        playBtn.position.y = 340;
+        playBtn.anchor.set(0.5, 0.5);
+        playBtn.interactive = true;
+        playBtn.on("pointerdown", () => {
+            // this.manager.setCurrentScene(CrossyCatScenes.MENU);
+            this.closeMenu();
+            this.changeState("menu");
+        });
+        this.addChild(playBtn);
+
+        const settingsBtn = new PIXI.Sprite(app.getTexture("settingsBtn"));
+        settingsBtn.position.x = 320 / 2;
+        settingsBtn.position.y = 390;
+        settingsBtn.anchor.set(0.5, 0.5);
+        settingsBtn.interactive = true;
+        settingsBtn.on("pointerdown", () => {
+            this.manager.setCurrentScene(CrossyCatScenes.MENU);
+        });
+        this.addChild(settingsBtn);
+
+        const hatBtn = new PIXI.Sprite(app.getTexture("hatBtn"));
+        hatBtn.position.x = 320 / 4;
+        hatBtn.position.y = 322;
+        hatBtn.anchor.set(0.5, 0);
+        hatBtn.interactive = true;
+        hatBtn.on("pointerdown", () => {
+            this.manager.setCurrentScene(CrossyCatScenes.DROPPING_OUT_HATS);
+        });
+        this.addChild(hatBtn);
+
+        const catBtn = new PIXI.Sprite(app.getTexture("catBtn"));
+        catBtn.position.x = 240;
+        catBtn.position.y = 322;
+        catBtn.anchor.set(0.5, 0);
+        catBtn.interactive = true;
+        catBtn.on("pointerdown", () => {
+            this.manager.setCurrentScene(CrossyCatScenes.DROPPING_OUT_SKINS);
+        });
+        this.addChild(catBtn);
     }
 }
