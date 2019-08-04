@@ -86,8 +86,24 @@ export class Game extends Scene {
         playBtn.interactive = true;
         playBtn.on("pointerdown", () => {
             // this.manager.setCurrentScene(CrossyCatScenes.MENU);
+            // this.closeMenu();
+            // this.changeState("game");
+            console.log("pointerdown");
+            playBtn.position.x += 3;
+        });
+        playBtn.on("pointerup", () => {
+            // this.manager.setCurrentScene(CrossyCatScenes.MENU);
             this.closeMenu();
             this.changeState("game");
+            playBtn.position.x -= 3;
+            console.log("pointerup");
+        });
+        playBtn.on("pointerupoutside", () => {
+            // this.manager.setCurrentScene(CrossyCatScenes.MENU);
+            this.closeMenu();
+            this.changeState("game");
+            playBtn.position.x -= 3;
+            console.log("pointerup");
         });
         this.popupMenu.addChild(playBtn);
 
@@ -96,7 +112,7 @@ export class Game extends Scene {
         settingsBtn.position.y = 330;
         settingsBtn.anchor.set(0.5, 0.5);
         settingsBtn.interactive = true;
-        settingsBtn.on("pointerdown", () => {
+        settingsBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.MENU);
         });
         this.popupMenu.addChild(settingsBtn);
@@ -132,6 +148,7 @@ export class Game extends Scene {
                 break;
         }
         this.currentState = name;
+        console.log(this.currentState);
     }
     private showMenu() {
         console.log("openMenu");
@@ -155,7 +172,7 @@ export class Game extends Scene {
         playBtn.position.y = 340;
         playBtn.anchor.set(0.5, 0.5);
         playBtn.interactive = true;
-        playBtn.on("pointerdown", () => {
+        playBtn.on("pointerup", () => {
             // this.manager.setCurrentScene(CrossyCatScenes.MENU);
             this.closeMenu();
             this.changeState("menu");
@@ -167,7 +184,7 @@ export class Game extends Scene {
         settingsBtn.position.y = 390;
         settingsBtn.anchor.set(0.5, 0.5);
         settingsBtn.interactive = true;
-        settingsBtn.on("pointerdown", () => {
+        settingsBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.MENU);
         });
         this.addChild(settingsBtn);
@@ -177,7 +194,7 @@ export class Game extends Scene {
         hatBtn.position.y = 322;
         hatBtn.anchor.set(0.5, 0);
         hatBtn.interactive = true;
-        hatBtn.on("pointerdown", () => {
+        hatBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.DROPPING_OUT_HATS);
         });
         this.addChild(hatBtn);
@@ -187,9 +204,23 @@ export class Game extends Scene {
         catBtn.position.y = 322;
         catBtn.anchor.set(0.5, 0);
         catBtn.interactive = true;
-        catBtn.on("pointerdown", () => {
+        catBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.DROPPING_OUT_SKINS);
         });
         this.addChild(catBtn);
+
+        const bigBlackLine = new PIXI.Graphics();
+        bigBlackLine.beginFill();
+        bigBlackLine.drawRect(0, 0, 320, 30);
+        bigBlackLine.endFill();
+        bigBlackLine.position.y = 278;
+        this.addChild(bigBlackLine);
+
+        const fish = new PIXI.Sprite(app.getTexture("fish2.png"));
+        fish.position.x = 320 / 2 + 25;
+        fish.position.y = bigBlackLine.position.y + 15;
+        fish.anchor.set(0.5, 0.5);
+        fish.rotation = 1.57081;
+        this.addChild(fish);
     }
 }

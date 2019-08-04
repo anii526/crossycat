@@ -43,7 +43,7 @@ export class Menu extends Scene {
         playBtn.position.y = 344;
         playBtn.anchor.set(0.5, 0.5);
         playBtn.interactive = true;
-        playBtn.on("pointerdown", () => {
+        playBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.GAME);
         });
         this.addChild(playBtn);
@@ -53,7 +53,7 @@ export class Menu extends Scene {
         hatBtn.position.y = 212;
         hatBtn.anchor.set(0.5, 0);
         hatBtn.interactive = true;
-        hatBtn.on("pointerdown", () => {
+        hatBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.HATS);
         });
         this.addChild(hatBtn);
@@ -63,7 +63,7 @@ export class Menu extends Scene {
         flaskBtn.position.y = 212;
         flaskBtn.anchor.set(0.5, 0);
         flaskBtn.interactive = true;
-        flaskBtn.on("pointerdown", () => {
+        flaskBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.FLASK);
         });
         this.addChild(flaskBtn);
@@ -73,7 +73,7 @@ export class Menu extends Scene {
         catBtn.position.y = 212;
         catBtn.anchor.set(0.5, 0);
         catBtn.interactive = true;
-        catBtn.on("pointerdown", () => {
+        catBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.SKINS);
         });
         this.addChild(catBtn);
@@ -83,7 +83,7 @@ export class Menu extends Scene {
         creditBtn.position.y = 311;
         creditBtn.anchor.set(0.5, 0);
         creditBtn.interactive = true;
-        creditBtn.on("pointerdown", () => {
+        creditBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.CREDITS);
         });
         this.addChild(creditBtn);

@@ -1,7 +1,7 @@
 import { app } from "../..";
 import { CrossyCatScrollerBackground } from "../CrossyCatScrollerBackground";
 import { Scene } from "../Scene";
-import { CrossyCatScenes } from "./CrossyCatScenes";
+// import { CrossyCatScenes } from "./CrossyCatScenes";
 
 export class DroppingOutHats extends Scene {
     private scrollerBG: CrossyCatScrollerBackground;
@@ -21,7 +21,7 @@ export class DroppingOutHats extends Scene {
         // backBtn.position.y = 383;
         // backBtn.anchor.set(0.5, 0);
         // backBtn.interactive = true;
-        // backBtn.on("pointerdown", () => {
+        // backBtn.on("pointerup", () => {
         //     this.manager.setCurrentScene(CrossyCatScenes.MENU);
         // });
         // this.addChild(backBtn);

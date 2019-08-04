@@ -21,7 +21,7 @@ export class Hats extends Scene {
         backBtn.position.y = 383;
         backBtn.anchor.set(0.5, 0);
         backBtn.interactive = true;
-        backBtn.on("pointerdown", () => {
+        backBtn.on("pointerup", () => {
             this.manager.setCurrentScene(CrossyCatScenes.MENU);
         });
         this.addChild(backBtn);
