@@ -33,6 +33,19 @@ export class ResourcesLoader {
             );
 
             this.loader.add("hat1", "./assets/sprite-16-0.png?" + version);
+            this.loader.add("test123", "./assets/test123.png?" + version);
+
+            this.loader.add("bg2", "./assets/background-32-0.png?" + version);
+            this.loader.add("playBtn2", "./assets/sprite-68-1.png?" + version);
+
+            this.loader.add("hatBtn", "./assets/sprite-78-2.png?" + version);
+            this.loader.add("flaskBtn", "./assets/sprite-116-2.png?" + version);
+            this.loader.add("catBtn", "./assets/sprite-88-2.png?" + version);
+
+            this.loader.add(
+                "creditBtn",
+                "./assets/sprite-179-2.png?" + version
+            );
 
             this.loader.on("progress", (loader, res) => {
                 // (loader.progress);

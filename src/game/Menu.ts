@@ -12,7 +12,7 @@ export class Menu extends State {
     private hero: Hero;
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
-        this.scrollerBG.init();
+        this.scrollerBG.init("bg");
         this.addChild(this.scrollerBG);
 
         const title = new PIXI.Sprite(app.getTexture("title"));

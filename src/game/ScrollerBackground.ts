@@ -3,7 +3,7 @@ export class ScrollerBackground extends PIXI.Sprite {
     constructor() {
         super();
     }
-    public init() {
+    public init(name: string) {
         this.bgs = [];
         // const bg1 = new PIXI.Sprite(app.getTexture("bg"));
         // this.addChild(bg1);
