@@ -1,4 +1,4 @@
-import { Game } from "./game/Game";
+import { World } from "./game/World";
 import { GameData } from "./GameData";
 import { PixiHelper } from "./PixiHelper";
 import { ResourcesLoader } from "./ResourcesLoader";
@@ -37,9 +37,9 @@ export class App {
 
         this.stage = this.pixi.app.stage;
 
-        const game = new Game();
-        game.init();
-        this.stage.addChild(game);
+        const world = new World();
+        world.init();
+        this.stage.addChild(world);
 
         // PreloaderManager.instance.setProgress(100, () => {
         //     // вызывается когда заканчивается анимация угасания экрана

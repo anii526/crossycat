@@ -1,8 +1,8 @@
-import { StateManager } from "./StateManager";
+import { SceneManager } from "./SceneManager";
 
-export class State extends PIXI.Sprite {
+export class Scene extends PIXI.Sprite {
     public name: string;
-    public manager: StateManager;
+    public manager: SceneManager;
     constructor() {
         super();
 
@@ -13,10 +13,10 @@ export class State extends PIXI.Sprite {
     public init() {
         //
     }
-    public runState(oldState: State) {
+    public runScene(oldScene: Scene) {
         //
     }
-    public exitState(newState: State) {
+    public exitScene(newScene: Scene) {
         //
     }
     public update(delta: number) {

@@ -1,10 +1,10 @@
-import { app } from "..";
-import { CrossyCatScrollerBackground } from "./CrossyCatScrollerBackground";
-import { CrossyCatStates } from "./CrossyCatStates";
-import { Hero } from "./Hero";
-import { State } from "./State";
+import { app } from "../..";
+import { CrossyCatScrollerBackground } from "../CrossyCatScrollerBackground";
+import { Hero } from "../Hero";
+import { Scene } from "../Scene";
+import { CrossyCatScenes } from "./CrossyCatScenes";
 
-export class Menu2 extends State {
+export class Menu extends Scene {
     private scrollerBG: CrossyCatScrollerBackground;
     private hero: Hero;
     public init() {
@@ -44,7 +44,7 @@ export class Menu2 extends State {
         playBtn.anchor.set(0.5, 0.5);
         playBtn.interactive = true;
         playBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU);
+            this.manager.setCurrentScene(CrossyCatScenes.GAME);
         });
         this.addChild(playBtn);
 
@@ -54,7 +54,7 @@ export class Menu2 extends State {
         hatBtn.anchor.set(0.5, 0);
         hatBtn.interactive = true;
         hatBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.HATS);
+            this.manager.setCurrentScene(CrossyCatScenes.HATS);
         });
         this.addChild(hatBtn);
 
@@ -64,7 +64,7 @@ export class Menu2 extends State {
         flaskBtn.anchor.set(0.5, 0);
         flaskBtn.interactive = true;
         flaskBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.FLASK);
+            this.manager.setCurrentScene(CrossyCatScenes.FLASK);
         });
         this.addChild(flaskBtn);
 
@@ -74,7 +74,7 @@ export class Menu2 extends State {
         catBtn.anchor.set(0.5, 0);
         catBtn.interactive = true;
         catBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.SKINS);
+            this.manager.setCurrentScene(CrossyCatScenes.SKINS);
         });
         this.addChild(catBtn);
 
@@ -84,7 +84,7 @@ export class Menu2 extends State {
         creditBtn.anchor.set(0.5, 0);
         creditBtn.interactive = true;
         creditBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.CREDITS);
+            this.manager.setCurrentScene(CrossyCatScenes.CREDITS);
         });
         this.addChild(creditBtn);
     }
@@ -93,7 +93,7 @@ export class Menu2 extends State {
             this.scrollerBG.update(delta);
         }
     }
-    public runState(oldState: State) {
+    public runScene(oldScene: Scene) {
         console.log("Menu2 show");
     }
 }

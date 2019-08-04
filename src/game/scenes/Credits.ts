@@ -1,9 +1,9 @@
-import { app } from "..";
-import { CrossyCatScrollerBackground } from "./CrossyCatScrollerBackground";
-import { CrossyCatStates } from "./CrossyCatStates";
-import { State } from "./State";
+import { app } from "../..";
+import { CrossyCatScrollerBackground } from "../CrossyCatScrollerBackground";
+import { Scene } from "../Scene";
+import { CrossyCatScenes } from "./CrossyCatScenes";
 
-export class Credits extends State {
+export class Credits extends Scene {
     private scrollerBG: CrossyCatScrollerBackground;
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
@@ -22,7 +22,7 @@ export class Credits extends State {
         backBtn.anchor.set(0.5, 0);
         backBtn.interactive = true;
         backBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU2);
+            this.manager.setCurrentScene(CrossyCatScenes.MENU);
         });
         this.addChild(backBtn);
 
@@ -38,7 +38,7 @@ export class Credits extends State {
             this.scrollerBG.update(delta);
         }
     }
-    public runState(oldState: State) {
+    public runScene(oldScene: Scene) {
         console.log("Credits show");
     }
 }

@@ -1,9 +1,9 @@
-import { app } from "..";
-import { CrossyCatScrollerBackground } from "./CrossyCatScrollerBackground";
-import { CrossyCatStates } from "./CrossyCatStates";
-import { State } from "./State";
+import { app } from "../..";
+import { CrossyCatScrollerBackground } from "../CrossyCatScrollerBackground";
+import { Scene } from "../Scene";
+import { CrossyCatScenes } from "./CrossyCatScenes";
 
-export class Hats extends State {
+export class Flask extends Scene {
     private scrollerBG: CrossyCatScrollerBackground;
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
@@ -22,11 +22,11 @@ export class Hats extends State {
         backBtn.anchor.set(0.5, 0);
         backBtn.interactive = true;
         backBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU2);
+            this.manager.setCurrentScene(CrossyCatScenes.MENU);
         });
         this.addChild(backBtn);
 
-        const titleTxt = new PIXI.Text("Hats");
+        const titleTxt = new PIXI.Text("Flask");
         titleTxt.style.fontSize = 25;
         titleTxt.anchor.set(0.5, 0);
         titleTxt.position.x = 320 / 2;
@@ -38,7 +38,7 @@ export class Hats extends State {
             this.scrollerBG.update(delta);
         }
     }
-    public runState(oldState: State) {
-        console.log("Hats show");
+    public runScene(oldScene: Scene) {
+        console.log("Flask show");
     }
 }

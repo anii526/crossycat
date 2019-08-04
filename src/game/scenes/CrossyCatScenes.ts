@@ -1,6 +1,6 @@
-export enum CrossyCatStates {
+export enum CrossyCatScenes {
+    GAME = "GAME",
     MENU = "MENU",
-    MENU2 = "MENU2",
     CREDITS = "CREDITS",
     HATS = "HATS",
     SKINS = "SKINS",

@@ -1,10 +1,10 @@
-import { app } from "..";
-import { CrossyCatScrollerBackground } from "./CrossyCatScrollerBackground";
-import { CrossyCatStates } from "./CrossyCatStates";
-import { Hero } from "./Hero";
-import { State } from "./State";
+import { app } from "../..";
+import { CrossyCatScrollerBackground } from "../CrossyCatScrollerBackground";
+import { Hero } from "../Hero";
+import { Scene } from "../Scene";
+import { CrossyCatScenes } from "./CrossyCatScenes";
 
-export class Menu extends State {
+export class Game extends Scene {
     private scrollerBG: CrossyCatScrollerBackground;
     private water: PIXI.Sprite;
     private waterAnimTime: number;
@@ -80,7 +80,7 @@ export class Menu extends State {
         playBtn.anchor.set(0.5, 0.5);
         playBtn.interactive = true;
         playBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU2);
+            this.manager.setCurrentScene(CrossyCatScenes.MENU);
         });
         this.addChild(playBtn);
 
@@ -90,7 +90,7 @@ export class Menu extends State {
         settingsBtn.anchor.set(0.5, 0.5);
         settingsBtn.interactive = true;
         settingsBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU2);
+            this.manager.setCurrentScene(CrossyCatScenes.MENU);
         });
         this.addChild(settingsBtn);
 
@@ -107,7 +107,7 @@ export class Menu extends State {
             this.waterAnimTime += this.speedAnimTime;
         }
     }
-    public runState(oldState: State) {
+    public runScene(oldScene: Scene) {
         console.log("Menu show");
     }
 }

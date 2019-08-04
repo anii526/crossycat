@@ -5,13 +5,6 @@ export class ScrollerBackground extends PIXI.Sprite {
     }
     public init(name: string) {
         this.bgs = [];
-        // const bg1 = new PIXI.Sprite(app.getTexture("bg"));
-        // this.addChild(bg1);
-        // const bg2 = new PIXI.Sprite(app.getTexture("bg"));
-        // bg2.position.x = 320;
-        // this.addChild(bg2);
-        // this.bgs.push(bg1);
-        // this.bgs.push(bg2);
     }
     public update(delta: number) {
         for (const iterator of this.bgs) {
