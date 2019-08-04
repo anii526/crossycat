@@ -21,7 +21,9 @@ export class App {
         // PreloaderManager.instance.init();
 
         this.container = await this.pixi.init();
+
         PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+
         this.initEventResize();
 
         const resLoadManager = new ResourcesLoader();

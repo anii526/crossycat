@@ -84,7 +84,7 @@ export class Menu2 extends State {
         creditBtn.anchor.set(0.5, 0);
         creditBtn.interactive = true;
         creditBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU);
+            this.manager.setCurrentState(CrossyCatStates.CREDITS);
         });
         this.addChild(creditBtn);
     }

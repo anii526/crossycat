@@ -41,6 +41,7 @@ export class ResourcesLoader {
             this.loader.add("hatBtn", "./assets/sprite-78-2.png?" + version);
             this.loader.add("flaskBtn", "./assets/sprite-116-2.png?" + version);
             this.loader.add("catBtn", "./assets/sprite-88-2.png?" + version);
+            this.loader.add("backBtn", "./assets/sprite-111-1.png?" + version);
 
             this.loader.add(
                 "creditBtn",
