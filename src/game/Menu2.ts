@@ -74,7 +74,7 @@ export class Menu2 extends State {
         catBtn.anchor.set(0.5, 0);
         catBtn.interactive = true;
         catBtn.on("pointerdown", () => {
-            this.manager.setCurrentState(CrossyCatStates.MENU);
+            this.manager.setCurrentState(CrossyCatStates.SKINS);
         });
         this.addChild(catBtn);
 
