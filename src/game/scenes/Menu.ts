@@ -94,6 +94,6 @@ export class Menu extends Scene {
         }
     }
     public runScene(oldScene: Scene) {
-        console.log("Menu2 show");
+        console.log("Menu show");
     }
 }

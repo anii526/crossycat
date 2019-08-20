@@ -12,6 +12,12 @@ export class Game extends Scene {
     private hero: Hero;
     private popupMenu: PIXI.Sprite;
     private currentState: string;
+
+    private isHeroScale: boolean;
+    private speedHeroScaleY: number;
+    private speedHeroScaleX: number;
+
+    private passedFrames: number;
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
         this.scrollerBG.init("bg");
@@ -120,6 +126,10 @@ export class Game extends Scene {
         this.waterAnimTime = 0;
         this.speedAnimTime = 0.03;
 
+        this.isHeroScale = false;
+        this.speedHeroScaleY = 0.0066;
+        this.speedHeroScaleX = 0.0022;
+
         this.changeState("menu");
     }
     public update(delta: number) {
@@ -130,6 +140,22 @@ export class Game extends Scene {
         if (this.water) {
             this.water.y = 408 + delta * (10 * Math.sin(this.waterAnimTime));
             this.waterAnimTime += this.speedAnimTime;
+        }
+
+        if (this.isHeroScale) {
+            if (this.hero.scale.y <= 0.4) {
+                this.hero.scale.y = 0.4;
+                console.log(this.passedFrames);
+            } else {
+                this.hero.scale.y -= this.speedHeroScaleY * delta;
+            }
+            if (this.hero.scale.x >= 1.2) {
+                this.hero.scale.x = 1.2;
+            } else {
+                this.hero.scale.x += this.speedHeroScaleX * delta;
+            }
+
+            this.passedFrames += 1;
         }
     }
     public runScene(oldScene: Scene) {
@@ -155,13 +181,34 @@ export class Game extends Scene {
     }
     private closeMenu() {
         console.log("closeMenu");
-        this.popupMenu.alpha = 0;
+        this.popupMenu.visible = false;
     }
     private showGame() {
         console.log("showGame");
-        setTimeout(() => {
-            this.changeState("lose");
-        }, 1000);
+        // setTimeout(() => {
+        //     this.changeState("lose");
+        // }, 10000);
+
+        this.interactive = true;
+        this.on("pointerdown", () => {
+            this.isHeroScale = true;
+
+            this.passedFrames = 0;
+        });
+        this.on("pointerup", () => {
+            this.isHeroScale = false;
+            this.hero.scale.y = 1;
+            this.hero.scale.x = 1;
+
+            console.log(this.passedFrames);
+        });
+        this.on("pointerupoutside", () => {
+            this.isHeroScale = false;
+            this.hero.scale.y = 1;
+            this.hero.scale.x = 1;
+
+            console.log(this.passedFrames);
+        });
     }
     private showLose() {
         console.log("showLose");

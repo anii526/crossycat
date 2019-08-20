@@ -14,9 +14,7 @@ export class World extends PIXI.Sprite {
     public createSceneManager() {
         const crossyCatSceneManager = new CrossyCatSceneManager(this);
         crossyCatSceneManager.init();
-        crossyCatSceneManager.setCurrentScene(
-            CrossyCatScenes.DROPPING_OUT_SKINS
-        );
+        crossyCatSceneManager.setCurrentScene(CrossyCatScenes.GAME);
 
         //
         app.pixi.app.ticker.add(delta => {
