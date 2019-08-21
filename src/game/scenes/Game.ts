@@ -3,6 +3,7 @@ import { CrossyCatScrollerBackground } from "../CrossyCatScrollerBackground";
 import { Hero } from "../Hero";
 import { Scene } from "../Scene";
 import { CrossyCatScenes } from "./CrossyCatScenes";
+const TWEEN = require("tween.js");
 
 export class Game extends Scene {
     private scrollerBG: CrossyCatScrollerBackground;
@@ -20,6 +21,8 @@ export class Game extends Scene {
     private passedFrames: number;
 
     private walls: PIXI.Sprite[];
+
+    private speed: number;
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
         this.scrollerBG.init("bg");
@@ -150,6 +153,8 @@ export class Game extends Scene {
         this.speedHeroScaleY = 0.0066;
         this.speedHeroScaleX = 0.0022;
 
+        this.speed = 0;
+
         this.changeState("menu");
     }
     public update(delta: number) {
@@ -226,9 +231,57 @@ export class Game extends Scene {
             if (id > 9) {
                 id = 9;
             }
+            const coordsStart = {
+                x: this.hero.position.x,
+                y: this.hero.position.y
+            };
+            const coordsFinish = {
+                x: 320 / 2 - 60,
+                y: this.walls[id].position.y + 23
+            };
 
-            this.hero.position.x = 320 / 2 - 60;
-            this.hero.position.y = this.walls[id].position.y + 23;
+            const dist = Math.sqrt(
+                Math.pow(coordsStart.x - coordsFinish.x, 2) +
+                    Math.pow(coordsStart.y - coordsFinish.y, 2)
+            );
+
+            if (this.speed === 0) {
+                const tempDist = Math.sqrt(
+                    Math.pow(45 - 320 / 2 - 60, 2) +
+                        Math.pow(
+                            385 -
+                                this.walls[this.walls.length - 1].position.y +
+                                23,
+                            2
+                        )
+                );
+                this.speed = tempDist / 400;
+            }
+
+            const time = dist / this.speed;
+
+            const tween = new TWEEN.Tween(coordsStart);
+            tween.to(coordsFinish, time);
+            tween.onUpdate(() => {
+                this.hero.position.x = coordsStart.x;
+                this.hero.position.y = coordsStart.y;
+            });
+            tween.onComplete(() => {
+                const coordsStart2 = {
+                    x: coordsFinish.x
+                };
+                const coordsFinish2 = {
+                    x: 320 / 2 + 60
+                };
+                const tween2 = new TWEEN.Tween(coordsStart2);
+                tween2.to(coordsFinish2, 350);
+                tween2.onUpdate(() => {
+                    this.hero.position.x = coordsStart2.x;
+                });
+                // tween2.onComplete(() => {});
+                tween2.start();
+            });
+            tween.start();
         });
         this.on("pointerupoutside", () => {
             this.isHeroScale = false;
