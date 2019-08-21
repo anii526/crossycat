@@ -240,28 +240,11 @@ export class Game extends Scene {
                 y: this.walls[id].position.y + 23
             };
 
-            const dist = Math.sqrt(
-                Math.pow(coordsStart.x - coordsFinish.x, 2) +
-                    Math.pow(coordsStart.y - coordsFinish.y, 2)
-            );
-
-            if (this.speed === 0) {
-                const tempDist = Math.sqrt(
-                    Math.pow(45 - 320 / 2 - 60, 2) +
-                        Math.pow(
-                            385 -
-                                this.walls[this.walls.length - 1].position.y +
-                                23,
-                            2
-                        )
-                );
-                this.speed = tempDist / 400;
-            }
-
-            const time = dist / this.speed;
+            const time = 200 + 20 * id;
 
             const tween = new TWEEN.Tween(coordsStart);
             tween.to(coordsFinish, time);
+            tween.easing(TWEEN.Easing.Cubic.Out);
             tween.onUpdate(() => {
                 this.hero.position.x = coordsStart.x;
                 this.hero.position.y = coordsStart.y;
@@ -274,11 +257,30 @@ export class Game extends Scene {
                     x: 320 / 2 + 60
                 };
                 const tween2 = new TWEEN.Tween(coordsStart2);
-                tween2.to(coordsFinish2, 350);
+                tween2.to(coordsFinish2, 300);
+                tween2.easing(TWEEN.Easing.Quadratic.InOut);
                 tween2.onUpdate(() => {
                     this.hero.position.x = coordsStart2.x;
                 });
-                // tween2.onComplete(() => {});
+                tween2.onComplete(() => {
+                    const coordsStart3 = {
+                        x: this.hero.position.x,
+                        y: this.hero.position.y
+                    };
+                    const coordsFinish3 = {
+                        x: 320 - 45,
+                        y: 385
+                    };
+                    const tween3 = new TWEEN.Tween(coordsStart3);
+                    tween3.to(coordsFinish3, time);
+                    tween3.easing(TWEEN.Easing.Cubic.In);
+                    tween3.onUpdate(() => {
+                        this.hero.position.x = coordsStart3.x;
+                        this.hero.position.y = coordsStart3.y;
+                    });
+                    // tween3.onComplete(() => {});
+                    tween3.start();
+                });
                 tween2.start();
             });
             tween.start();
