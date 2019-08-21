@@ -18,6 +18,8 @@ export class Game extends Scene {
     private speedHeroScaleX: number;
 
     private passedFrames: number;
+
+    private walls: PIXI.Sprite[];
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
         this.scrollerBG.init("bg");
@@ -123,6 +125,24 @@ export class Game extends Scene {
         });
         this.popupMenu.addChild(settingsBtn);
 
+        this.walls = [];
+        for (let i = 9; i >= 0; i--) {
+            const wall = new PIXI.Sprite(app.getTexture("wall"));
+            wall.anchor.set(0.5, 0.5);
+            wall.position.x = 320 / 2;
+            wall.position.y = 32 * i + 25;
+            this.addChild(wall);
+            this.walls.push(wall);
+        }
+        for (const wall of this.walls) {
+            console.log(wall.position.y);
+        }
+        // const wall = new PIXI.Sprite(app.getTexture("wall"));
+        // wall.anchor.set(0.5, 0.5);
+        // wall.position.x = 320 / 2;
+        // wall.position.y = 20;
+        // this.addChild(wall);
+
         this.waterAnimTime = 0;
         this.speedAnimTime = 0.03;
 
@@ -201,6 +221,14 @@ export class Game extends Scene {
             this.hero.scale.x = 1;
 
             console.log(this.passedFrames);
+
+            let id = Math.floor(this.passedFrames / 10);
+            if (id > 9) {
+                id = 9;
+            }
+
+            this.hero.position.x = 320 / 2 - 60;
+            this.hero.position.y = this.walls[id].position.y + 23;
         });
         this.on("pointerupoutside", () => {
             this.isHeroScale = false;

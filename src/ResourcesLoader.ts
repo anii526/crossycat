@@ -68,6 +68,8 @@ export class ResourcesLoader {
                 "./assets/sprite-100-0.png?" + version
             );
 
+            this.loader.add("wall", "./assets/sprite-51-5.png?" + version);
+
             this.loader.on("progress", (loader, res) => {
                 // (loader.progress);
                 // PreloaderManager.instance.setProgress(loader.progress > 90 ? 90 : loader.progress)
