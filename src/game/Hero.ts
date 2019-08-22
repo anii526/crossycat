@@ -1,10 +1,12 @@
 import { app } from "..";
+import { Wall } from "./Wall";
 const TWEEN = require("tween.js");
 
 export class Hero extends PIXI.Sprite {
     public skinHero: PIXI.AnimatedSprite;
     public skinHat: PIXI.Sprite;
     public container: PIXI.Sprite;
+    public box: PIXI.Graphics;
     constructor() {
         super();
     }
@@ -25,13 +27,24 @@ export class Hero extends PIXI.Sprite {
         this.skinHat.position.x = 11;
         this.skinHat.anchor.set(0.5, 1);
         this.container.addChild(this.skinHat);
+
+        this.box = new PIXI.Graphics();
+        this.box.beginFill();
+        this.box.drawRect(0, 0, 60, 32);
+        this.box.endFill();
+        this.box.position.x = -30;
+        this.box.position.y = -32;
+        // this.addChild(this.box);
+        // this.box.position.set(0.5, 1);
     }
     public jump(
         heightJump: number,
         timeJump: number,
-        paramsJump: [number, number, number]
+        paramsJump: [number, number, number],
+        aWall: Wall
     ) {
-        return new Promise(reject => {
+        const wall = aWall;
+        return new Promise((resolve, reject) => {
             const coordsStart = {
                 x: this.position.x,
                 y: this.position.y
@@ -62,6 +75,16 @@ export class Hero extends PIXI.Sprite {
                 tween2.easing(TWEEN.Easing.Quadratic.InOut);
                 tween2.onUpdate(() => {
                     this.position.x = coordsStart2.x;
+
+                    if (wall.active) {
+                        const dist = Math.abs(
+                            wall.position.x - this.position.x
+                        );
+                        if (dist < 30) {
+                            tween2.stop();
+                            reject();
+                        }
+                    }
                 });
                 tween2.onComplete(() => {
                     const coordsStart3 = {
@@ -80,11 +103,37 @@ export class Hero extends PIXI.Sprite {
                         this.position.y = coordsStart3.y;
                     });
                     tween3.onComplete(() => {
-                        reject();
+                        resolve();
                     });
                     tween3.start();
                 });
                 tween2.start();
+            });
+            tween.start();
+        });
+    }
+    public back(posX: number, timeJump: number) {
+        return new Promise(resolve => {
+            const coordsStart = {
+                x: this.position.x,
+                y: this.position.y
+            };
+            const coordsFinish = {
+                x: posX,
+                y: 385
+            };
+
+            const time = timeJump;
+
+            const tween = new TWEEN.Tween(coordsStart);
+            tween.to(coordsFinish, time);
+            tween.easing(TWEEN.Easing.Cubic.In);
+            tween.onUpdate(() => {
+                this.position.x = coordsStart.x;
+                this.position.y = coordsStart.y;
+            });
+            tween.onComplete(() => {
+                resolve();
             });
             tween.start();
         });
