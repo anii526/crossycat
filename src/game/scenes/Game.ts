@@ -83,10 +83,10 @@ export class Game extends Scene {
             this.addChild(wall);
             this.walls.push(wall);
         }
-        this.walls[0].active = false;
-        for (const wall of this.walls) {
-            console.log(wall.position.y);
-        }
+        // this.walls[0].active = false;
+        // for (const wall of this.walls) {
+        //     console.log(wall.position.y);
+        // }
 
         this.hero = new Hero();
         this.hero.init();
@@ -246,10 +246,12 @@ export class Game extends Scene {
                 .then(
                     resolve => {
                         this.hero.container.scale.x *= -1;
+                        this.hero.stateReady();
                     },
                     reject => {
                         this.hero.back(backParam, timeJump).then(resolve => {
                             console.log("end");
+                            this.hero.stateReady();
                         });
                     }
                 );

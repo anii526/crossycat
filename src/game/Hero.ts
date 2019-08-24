@@ -5,6 +5,7 @@ const TWEEN = require("tween.js");
 export class Hero extends PIXI.Sprite {
     public skinHero: PIXI.AnimatedSprite;
     public skinHat: PIXI.Sprite;
+    public skinHeroJump: PIXI.Sprite;
     public container: PIXI.Sprite;
     public box: PIXI.Graphics;
     constructor() {
@@ -22,6 +23,11 @@ export class Hero extends PIXI.Sprite {
         this.skinHero.animationSpeed = 16 / 60;
         this.skinHero.play();
         this.container.addChild(this.skinHero);
+
+        this.skinHeroJump = new PIXI.Sprite(app.getTexture("cat"));
+        this.skinHeroJump.anchor.set(0.5, 1);
+        this.skinHeroJump.visible = false;
+        this.container.addChild(this.skinHeroJump);
 
         this.skinHat = new PIXI.Sprite(app.getTexture("hat1"));
         this.skinHat.position.x = 11;
@@ -45,6 +51,7 @@ export class Hero extends PIXI.Sprite {
     ) {
         const wall = aWall;
         return new Promise((resolve, reject) => {
+            this.stateJump();
             const coordsStart = {
                 x: this.position.x,
                 y: this.position.y
@@ -75,12 +82,10 @@ export class Hero extends PIXI.Sprite {
                 tween2.easing(TWEEN.Easing.Quadratic.InOut);
                 tween2.onUpdate(() => {
                     this.position.x = coordsStart2.x;
-
-                    if (wall.active) {
-                        const dist = Math.abs(
-                            wall.position.x - this.position.x
-                        );
-                        if (dist < 30) {
+                    const dist = Math.abs(wall.position.x - this.position.x);
+                    if (dist < 30) {
+                        if (wall.active) {
+                            wall.delete();
                             tween2.stop();
                             reject();
                         }
@@ -137,5 +142,17 @@ export class Hero extends PIXI.Sprite {
             });
             tween.start();
         });
+    }
+    public stateReady() {
+        this.skinHero.gotoAndPlay(0);
+        this.skinHero.visible = true;
+
+        this.skinHeroJump.visible = false;
+    }
+    public stateJump() {
+        this.skinHero.gotoAndStop(0);
+        this.skinHero.visible = false;
+
+        this.skinHeroJump.visible = true;
     }
 }

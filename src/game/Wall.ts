@@ -22,4 +22,8 @@ export class Wall extends PIXI.Sprite {
 
         this.active = true;
     }
+    public delete() {
+        this.active = false;
+        this.skin.visible = false;
+    }
 }
