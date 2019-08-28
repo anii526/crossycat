@@ -85,9 +85,10 @@ export class Hero extends PIXI.Sprite {
                     const dist = Math.abs(item.position.x - this.position.x);
                     if (dist < 30) {
                         if (item.isActive) {
-                            item.hit();
-                            tween2.stop();
-                            reject();
+                            if (item.hit()) {
+                                tween2.stop();
+                                reject();
+                            }
                         }
                     }
                 });
@@ -108,6 +109,7 @@ export class Hero extends PIXI.Sprite {
                         this.position.y = coordsStart3.y;
                     });
                     tween3.onComplete(() => {
+                        item.check();
                         resolve();
                     });
                     tween3.start();

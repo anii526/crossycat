@@ -4,7 +4,9 @@ import { Hero } from "../Hero";
 import { Scene } from "../Scene";
 import { CrossyCatScenes } from "./CrossyCatScenes";
 import { BaseItem } from "./game/items/BaseItem";
+import { Empty } from "./game/items/Empty";
 import { Wall } from "./game/items/Wall";
+// import { Wall } from "./game/items/Wall";
 // const TWEEN = require("tween.js");
 
 export class Game extends Scene {
@@ -252,6 +254,19 @@ export class Game extends Scene {
                     },
                     reject => {
                         this.hero.back(backParam, timeJump).then(resolve => {
+                            // this.removeChild(this.items[id]);
+                            // id = 9 - id;
+                            // console.log(this.items);
+                            // // this.items[id] = item;
+
+                            // const item = new Empty();
+                            // item.init();
+                            // item.position.x = 320 / 2;
+                            // item.position.y = 32 * id + 25;
+                            // this.addChild(item);
+                            // this.items[id] = item;
+
+                            // console.log(this.items);
                             console.log("end");
                             this.hero.stateReady();
                         });

@@ -12,7 +12,11 @@ export class BaseItem extends PIXI.Sprite {
 
         this.isActive = true;
     }
-    public hit() {
+    public hit(): boolean {
+        this.isActive = false;
+        return true;
+    }
+    public check() {
         //
     }
 }
