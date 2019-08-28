@@ -1,5 +1,5 @@
 import { app } from "..";
-import { Wall } from "./Wall";
+import { BaseItem } from "./scenes/game/items/BaseItem";
 const TWEEN = require("tween.js");
 
 export class Hero extends PIXI.Sprite {
@@ -47,9 +47,9 @@ export class Hero extends PIXI.Sprite {
         heightJump: number,
         timeJump: number,
         paramsJump: [number, number, number],
-        aWall: Wall
+        aItem: BaseItem
     ) {
-        const wall = aWall;
+        const item = aItem;
         return new Promise((resolve, reject) => {
             this.stateJump();
             const coordsStart = {
@@ -82,10 +82,10 @@ export class Hero extends PIXI.Sprite {
                 tween2.easing(TWEEN.Easing.Quadratic.InOut);
                 tween2.onUpdate(() => {
                     this.position.x = coordsStart2.x;
-                    const dist = Math.abs(wall.position.x - this.position.x);
+                    const dist = Math.abs(item.position.x - this.position.x);
                     if (dist < 30) {
-                        if (wall.active) {
-                            wall.delete();
+                        if (item.isActive) {
+                            item.hit();
                             tween2.stop();
                             reject();
                         }

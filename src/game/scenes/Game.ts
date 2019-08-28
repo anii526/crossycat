@@ -2,8 +2,9 @@ import { app } from "../..";
 import { CrossyCatScrollerBackground } from "../CrossyCatScrollerBackground";
 import { Hero } from "../Hero";
 import { Scene } from "../Scene";
-import { Wall } from "../Wall";
 import { CrossyCatScenes } from "./CrossyCatScenes";
+import { BaseItem } from "./game/items/BaseItem";
+import { Wall } from "./game/items/Wall";
 // const TWEEN = require("tween.js");
 
 export class Game extends Scene {
@@ -21,7 +22,7 @@ export class Game extends Scene {
 
     private passedFrames: number;
 
-    private walls: Wall[];
+    private items: BaseItem[];
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
         this.scrollerBG.init("bg");
@@ -74,14 +75,14 @@ export class Game extends Scene {
         bushes.position.y = 355;
         this.addChild(bushes);
 
-        this.walls = [];
+        this.items = [];
         for (let i = 9; i >= 0; i--) {
-            const wall = new Wall();
-            wall.init();
-            wall.position.x = 320 / 2;
-            wall.position.y = 32 * i + 25;
-            this.addChild(wall);
-            this.walls.push(wall);
+            const item = new Wall();
+            item.init();
+            item.position.x = 320 / 2;
+            item.position.y = 32 * i + 25;
+            this.addChild(item);
+            this.items.push(item);
         }
         // this.walls[0].active = false;
         // for (const wall of this.walls) {
@@ -161,7 +162,8 @@ export class Game extends Scene {
         }
 
         if (this.water) {
-            this.water.y = 408 + delta * (10 * Math.sin(this.waterAnimTime));
+            // this.water.y = 408 + delta * (10 * Math.sin(this.waterAnimTime));
+            this.water.y = 408 + 10 * Math.sin(this.waterAnimTime);
             this.waterAnimTime += this.speedAnimTime;
         }
 
@@ -230,7 +232,7 @@ export class Game extends Scene {
                 id = 9;
             }
 
-            const heightJump = this.walls[id].position.y + 23;
+            const heightJump = this.items[id].position.y + 23;
             const timeJump = 200 + 20 * id;
             let backParam: number;
             let paramsJump: [number, number, number];
@@ -242,7 +244,7 @@ export class Game extends Scene {
                 backParam = 320 - 40;
             }
             this.hero
-                .jump(heightJump, timeJump, paramsJump, this.walls[id])
+                .jump(heightJump, timeJump, paramsJump, this.items[id])
                 .then(
                     resolve => {
                         this.hero.container.scale.x *= -1;

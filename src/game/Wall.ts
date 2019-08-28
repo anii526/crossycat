@@ -10,7 +10,7 @@ export class Wall extends PIXI.Sprite {
     public init() {
         this.skin = new PIXI.Sprite(app.getTexture("wall"));
         this.skin.anchor.set(0.5, 0.5);
-        this.addChild(this.skin);
+        // this.addChild(this.skin);
 
         this.box = new PIXI.Graphics();
         this.box.beginFill();
@@ -21,6 +21,18 @@ export class Wall extends PIXI.Sprite {
         // this.addChild(this.box);
 
         this.active = true;
+
+        const fish = new PIXI.AnimatedSprite(app.getTexturesForName("fish", 4));
+        fish.anchor.set(0.5, 0.5);
+        // fish.position.x = 160;
+        // fish.position.y = 200;
+        fish.animationSpeed = 16 / 60;
+        fish.play();
+        this.addChild(fish);
+
+        app.pixi.app.ticker.add(delta => {
+            fish.rotation += 0.1 * delta;
+        });
     }
     public delete() {
         this.active = false;
