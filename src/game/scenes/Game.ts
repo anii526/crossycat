@@ -26,6 +26,7 @@ export class Game extends Scene {
     private passedFrames: number;
 
     private items: BaseItem[];
+    private scoreTxt: PIXI.Text;
     public init() {
         this.scrollerBG = new CrossyCatScrollerBackground();
         this.scrollerBG.init("bg");
@@ -157,6 +158,13 @@ export class Game extends Scene {
         // wall.position.y = 20;
         // this.addChild(wall);
 
+        this.scoreTxt = new PIXI.Text("Score");
+        this.scoreTxt.style.fontSize = 25;
+        this.scoreTxt.anchor.set(0.5, 0);
+        this.scoreTxt.position.x = 320 / 2;
+        this.scoreTxt.position.y = 100;
+        this.addChild(this.scoreTxt);
+
         this.waterAnimTime = 0;
         this.speedAnimTime = 0.03;
 
@@ -226,11 +234,17 @@ export class Game extends Scene {
 
         this.interactive = true;
         this.on("pointerdown", () => {
+            if (this.hero.isJump === true) {
+                return;
+            }
             this.isHeroScale = true;
 
             this.passedFrames = 0;
         });
         this.on("pointerup", () => {
+            if (this.hero.isJump === true) {
+                return;
+            }
             this.isHeroScale = false;
             this.hero.scale.y = 1;
             this.hero.scale.x = 1;
@@ -257,10 +271,12 @@ export class Game extends Scene {
                 .jump(heightJump, timeJump, paramsJump, this.items[id])
                 .then(
                     resolve => {
+                        console.log("resolve");
                         this.hero.container.scale.x *= -1;
                         this.hero.stateReady();
                     },
                     reject => {
+                        console.log("reject");
                         this.hero.back(backParam, timeJump).then(resolve => {
                             console.log("end");
                             this.hero.stateReady();
@@ -269,6 +285,9 @@ export class Game extends Scene {
                 );
         });
         this.on("pointerupoutside", () => {
+            if (this.hero.isJump === true) {
+                return;
+            }
             this.isHeroScale = false;
             this.hero.scale.y = 1;
             this.hero.scale.x = 1;

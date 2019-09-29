@@ -12,6 +12,7 @@ export class Wall extends BaseItem {
         if (this.skin.alpha === 1) {
             this.skin.alpha = 0.5;
             this.isActive = false;
+            // this.isActive = true;
             return true;
         } else {
             this.isActive = false;

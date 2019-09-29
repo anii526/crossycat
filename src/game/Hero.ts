@@ -8,6 +8,7 @@ export class Hero extends PIXI.Sprite {
     public skinHeroJump: PIXI.Sprite;
     public container: PIXI.Sprite;
     public box: PIXI.Graphics;
+    public isJump: boolean = false;
     constructor() {
         super();
     }
@@ -146,12 +147,14 @@ export class Hero extends PIXI.Sprite {
         });
     }
     public stateReady() {
+        this.isJump = false;
         this.skinHero.gotoAndPlay(0);
         this.skinHero.visible = true;
 
         this.skinHeroJump.visible = false;
     }
     public stateJump() {
+        this.isJump = true;
         this.skinHero.gotoAndStop(0);
         this.skinHero.visible = false;
 
